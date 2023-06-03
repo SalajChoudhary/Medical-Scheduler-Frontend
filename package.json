@@ -6,7 +6,8 @@
     "start": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    heroku config:set NPM_CONFIG_PRODUCTION=false YARN_PRODUCTION=false
   },
   "dependencies": {
     "axios": "^0.21.1",
