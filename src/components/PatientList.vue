@@ -5,12 +5,15 @@
         <h1 class="mb-6">What's up, doc?</h1>
         <v-divider class="mb-16"> </v-divider>
         <div class="display-1 ma-2 mt-16">Patients</div>
+        <v-card>
         <v-data-table
           :items="this.$store.state.patients"
           :headers="headers"
           hide-default-footer
         >
         </v-data-table>
+        </v-card>
+        <v-btn class="mt-3" @click="goToUpdateForm()"> Change Appointment </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -39,6 +42,10 @@ export default {
         this.$store.commit("SET_PATIENTS", response.data);
       });
     },
+    goToUpdateForm() {
+      this.item = "";
+      this.$router.push({ name: "updateDoctorAppointments" });
+    }
   },
   data() {
     return {
