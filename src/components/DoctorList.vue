@@ -81,8 +81,8 @@ export default {
       doctors: [],
       userId: 0,
       officeInfo: {
-        officeName: "Party Doctors United",
-        mainAddress: "1420 Savelives st",
+        officeName: "Programming Doctors United",
+        mainAddress: "555 Savelives st",
         cityState: "Phoenix, AZ",
         mainPhone: "800-500-1212",
       },
