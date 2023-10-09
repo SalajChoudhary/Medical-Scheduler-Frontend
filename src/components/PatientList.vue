@@ -35,6 +35,9 @@ export default {
       ];
     },
   },
+  watch: {
+    getDoctorId: "getPatients", // Watch for changes in getDoctorId and call getPatients
+  },
   methods: {
     getPatients() {
       let doctorId = this.$store.getters.getDoctorId;

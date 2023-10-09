@@ -188,7 +188,6 @@ export default {
       }
     },
     updateAppointment() {
-      this.appointment.patientId = this.$store.state.patientId;
       AppointmentService.updateAppointment(this.appointmentObj.appointmentId, this.appointmentObj).then(
         (response) => {
           if (response.status === 200) {
@@ -206,7 +205,6 @@ export default {
       //this.$router.push("/");
     },
     deleteAppointment() {
-      this.appointment.patientId = this.$store.state.patientId;
       // appointmentObj = this.$store.state.currentAppointments.filter(currentAppointments => currentAppointments.appointmentDate === this.appointment.appointmentDate);
       this.appointment.appointmentId = this.appointmentObj.appointmentId;
       AppointmentService.deleteAppointment(this.appointment.appointmentId).then(
