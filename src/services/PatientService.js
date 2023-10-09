@@ -12,7 +12,7 @@ export default {
         return http.get('/patients');
     },
     getPatientByBookedAppointment(doctorId) {
-        return http.get(`/getPatientForDoctor/${doctorId}`);
+        return http.get(`/patients/getPatientForDoctor/${doctorId}`);
     },
     getPatientByUserId(id) {
         return http.get(`/patients/user/${id}`);
