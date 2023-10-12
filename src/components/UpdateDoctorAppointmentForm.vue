@@ -52,31 +52,6 @@
               @change="chosenAppointment"
             >
             </v-select>
-<!--            <v-select-->
-<!--              :items="this.$store.state.doctors"-->
-<!--              v-model="doctorObj"-->
-<!--              item-text="firstName"-->
-<!--              item-value="id"-->
-<!--              return-object-->
-<!--              dense-->
-<!--              outlined-->
-<!--              hide-details-->
-<!--              class="ma-2 pb-6"-->
-<!--              label="doctors"-->
-<!--              @change="chosenDoctor"-->
-<!--            ></v-select>-->
-<!--            <v-select-->
-<!--              :items="timeslots"-->
-<!--              v-model="appointment.appointmentTime"-->
-<!--              item-text=""-->
-<!--              item-value="id"-->
-<!--              return-object-->
-<!--              dense-->
-<!--              outlined-->
-<!--              hide-details-->
-<!--              class="ma-2 pb-6"-->
-<!--              label="timeslots"-->
-<!--            ></v-select>-->
             <v-text-field
                 v-show="selected === 'Update'"
                 v-model="appointmentObj.appointmentDate"
@@ -89,7 +64,7 @@
             <v-select
                 v-show="selected === 'Update' && appointmentObj.appointmentDate !== ''"
                 :items="timeslots"
-                v-model="appointmentObj.appointmentTime" t
+                v-model="appointmentObj.appointmentTime"
                 dense
                 outlined
                 hide-details
