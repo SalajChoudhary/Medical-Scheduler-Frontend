@@ -21,6 +21,9 @@ export default {
         return http.put(`/patients/${id}`, patient);
     },
 
+    getPatientById(id) {
+      return http.get(`/patients/${id}`);
+    },
     delete(id) {
         return http.delete(`/patients/${id}`);
     },

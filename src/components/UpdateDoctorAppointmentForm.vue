@@ -97,6 +97,14 @@
                 label="timeslots"
                 @change="chosenTime"
             ></v-select>
+
+            <v-text-field
+                v-if="patientName"
+                readonly
+                label="Patient Name"
+                :value="patientName"
+            ></v-text-field>
+
             <v-text-field
                 v-show="selected === 'Update'"
               v-model="appointmentObj.description"
@@ -117,6 +125,7 @@
 import AppointmentService from "../services/AppointmentService";
 import Navbar from "../components/Navbar.vue";
 import DoctorTimeService from "../services/DoctorTimeService";
+import PatientService from "../services/PatientService";
 export default {
   name: "UpdateAppointmentForm",
 
@@ -142,6 +151,7 @@ export default {
       appointmentDate: "",
       appointmentTime: "",
     },
+    patientName: '',
     timeslots: [],
     valid: false,
     selected: null,
@@ -256,6 +266,14 @@ export default {
         this.appointment = response.data;
       });
       this.chosenTime();
+      PatientService.getPatientById(this.appointmentObj.patientId)
+          .then(response => {
+            // Assuming the backend returns an object with a name field
+            this.patientName = response.data.firstName + ' ' + response.data.lastName;
+          })
+          .catch(error => {
+            console.error("Error fetching patient details:", error);
+          })
     },
   },
   created() {
