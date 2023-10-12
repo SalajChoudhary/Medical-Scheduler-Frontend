@@ -112,6 +112,12 @@
                 :value="patientEmailAddress"
             ></v-text-field>
             <v-text-field
+                v-if="patientBirthDate"
+                readonly
+                label="Patient Birth Date"
+                :value="patientBirthDate"
+            ></v-text-field>
+            <v-text-field
                 v-show="selected === 'Update'"
               v-model="appointmentObj.description"
               :counter="100"
@@ -159,6 +165,7 @@ export default {
     },
     patientName: '',
     patientEmailAddress: '',
+    patientBirthDate: '',
     timeslots: [],
     valid: false,
     selected: null,
@@ -276,9 +283,10 @@ export default {
       PatientService.getPatientById(this.appointmentObj.patientId)
           .then(response => {
             // Assuming the backend returns an object with a name field
-            console.log(response.data);
             this.patientName = response.data.firstName + ' ' + response.data.lastName;
             this.patientEmailAddress = response.data.emailAddress;
+            const birthDateData = response.data.birthdatet;
+            this.patientBirthDate = `${birthDateData.year}-${birthDateData.month}-${birthDateData.day}`;
           })
           .catch(error => {
             console.error("Error fetching patient details:", error);
