@@ -75,7 +75,7 @@ export default {
         {text: "City", value: "city"},
         {text: "State", value: "states"},
         {text: "Zipcode", value: "zipcode"},
-        {text: "Phone Number", value: "phoneNumber"},
+        {text: "Phone Number", value: "patientNumber"},
         {text: "Birthdate", value: "birthdate"},
         {text: "", value: "action"}
       ]
