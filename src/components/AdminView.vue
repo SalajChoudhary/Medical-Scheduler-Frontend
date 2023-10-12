@@ -31,7 +31,7 @@
     <v-card>
       <v-data-table
           :items="this.$store.state.patients"
-          :headers="headers"
+          :headers="patientHeaders"
           hide-default-footer
           v-model="patientObj"
           item-key="id"
@@ -67,6 +67,19 @@ export default {
         { text: "", value: "action" },
       ];
     },
+    patientHeaders() {
+      return [
+        {text: "First Name", value: "firstName"},
+        {text: "Last Name", value: "lastName"},
+        {text: "Address", value: "address"},
+        {text: "City", value: "city"},
+        {text: "State", value: "states"},
+        {text: "Zipcode", value: "zipcode"},
+        {text: "Phone Number", value: "phoneNumber"},
+        {text: "Birthdate", value: "birthdate"},
+        {text: "", value: "action"}
+      ]
+    }
   },
   methods: {
     updateDoctor() {
