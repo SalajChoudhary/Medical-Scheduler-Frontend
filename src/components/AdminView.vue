@@ -43,6 +43,7 @@
           <v-icon @click="removePatient(item.patientId)"
           >mdi-trash-can-outline</v-icon
           >
+          </template>
       </v-data-table>
     </v-card>
   </v-container>
