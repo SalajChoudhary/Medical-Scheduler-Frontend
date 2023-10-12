@@ -106,6 +106,12 @@
             ></v-text-field>
 
             <v-text-field
+                v-if="patientEmailAddress"
+                readonly
+                label="Patient Email Address"
+                :value="patientEmailAddress"
+            ></v-text-field>
+            <v-text-field
                 v-show="selected === 'Update'"
               v-model="appointmentObj.description"
               :counter="100"
@@ -270,6 +276,7 @@ export default {
       PatientService.getPatientById(this.appointmentObj.patientId)
           .then(response => {
             // Assuming the backend returns an object with a name field
+            console.log(response.data);
             this.patientName = response.data.firstName + ' ' + response.data.lastName;
             this.patientEmailAddress = response.data.emailAddress;
           })
