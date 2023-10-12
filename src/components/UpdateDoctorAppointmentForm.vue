@@ -152,6 +152,8 @@ export default {
       appointmentTime: "",
     },
     patientName: '',
+    patientBirthDate: '',
+    patientEmailAddress: '',
     timeslots: [],
     valid: false,
     selected: null,
@@ -270,6 +272,8 @@ export default {
           .then(response => {
             // Assuming the backend returns an object with a name field
             this.patientName = response.data.firstName + ' ' + response.data.lastName;
+            this.patientBirthDate = response.data.birthdate;
+            this.patientEmailAddress = response.data.emailAddress;
           })
           .catch(error => {
             console.error("Error fetching patient details:", error);
