@@ -138,6 +138,14 @@ const router = new Router({
       }
     },
     {
+      path: "/updatePatient/:id",
+      name: "UpdatePatientForm",
+        component: UpdatePatientForm,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
       path: "/reviews/createReview",
       name: "createReview",
       component: CreateReview,

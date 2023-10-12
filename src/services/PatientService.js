@@ -17,14 +17,18 @@ export default {
     getPatientByUserId(id) {
         return http.get(`/patients/user/${id}`);
     },
-    update(id, patient) {
+    updatePatient(id, patient) {
         return http.put(`/patients/${id}`, patient);
+    },
+
+    getAllPatients() {
+        return http.get('/patients');
     },
 
     getPatientById(id) {
       return http.get(`/patients/${id}`);
     },
-    delete(id) {
+    deletePatient(id) {
         return http.delete(`/patients/${id}`);
     },
 
