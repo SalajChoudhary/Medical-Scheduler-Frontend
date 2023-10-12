@@ -285,7 +285,7 @@ export default {
             // Assuming the backend returns an object with a name field
             this.patientName = response.data.firstName + ' ' + response.data.lastName;
             this.patientEmailAddress = response.data.emailAddress;
-            const birthDateData = response.data.birthdatet;
+            const birthDateData = response.data.birthdate;
             this.patientBirthDate = `${birthDateData.year}-${birthDateData.month}-${birthDateData.day}`;
           })
           .catch(error => {
