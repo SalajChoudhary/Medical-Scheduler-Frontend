@@ -15,6 +15,7 @@ import ReviewView from '../views/ReviewView'
 import CreateReview from "@/components/CreateReview.vue";
 import UpdateAppointmentForm from "@/components/UpdateAppointmentForm.vue";
 import UpdateDoctorAppointmentForm from "@/components/UpdateDoctorAppointmentForm.vue";
+import UpdatePatientForm from "@/components/UpdatePatientForm.vue";
 
 
 Vue.use(Router)
