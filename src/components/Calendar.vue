@@ -120,6 +120,8 @@ export default {
       });
     },
     showEventDetails(event) {
+      // eslint-disable-next-line no-console
+      console.log("Raw event from calendar:", event);
       this.selectedEvent = event;
       this.dialog = true;
       // eslint-disable-next-line no-console
@@ -145,6 +147,7 @@ export default {
         } else {
           endTime = time.slice(0, 2) + ":30:00";
         }
+
 
         return {
           docId: temp.doctorId,
