@@ -121,6 +121,7 @@ export default {
     showEventDetails(event) {
       this.selectedEvent = event;
       this.dialog = true;
+      // eslint-disable-next-line no-console
       console.log("Clicked event details:", event);
     },
     getEvents() {
@@ -146,18 +147,21 @@ export default {
           color: "blue",
           timed: false,
         };
+        // eslint-disable-next-line no-console
         console.log("Generated event:", event);
         this.events.push(event);
       }
     },
     getDoctorName(id) {
       let doctor = this.doctors.find(doc => doc.doctorId === id);
+      // eslint-disable-next-line no-console
       console.log("Doctor fetched for ID:", id, doctor);
       return doctor ? doctor.firstName : 'Unknown';
     },
 
     getPatientName(id) {
       let patient = this.patients.find(pat => pat.patientId === id);
+      // eslint-disable-next-line no-console
       console.log("Patient fetched for ID:", id, patient);
       return patient ? patient.firstName : 'Unknown';
     },
