@@ -52,15 +52,31 @@
           :weekdays="weekday"
           :type="type"
           :events="filteredAppointments"
+          @click:event="showEventDetails"
           :now="now"
         ></v-calendar>
       </v-sheet>
+      <!-- Dialog for displaying appointment details -->
+      <v-dialog v-model="dialog" max-width="400px">
+        <v-card>
+          <v-card-title>Appointment Details</v-card-title>
+          <v-card-text>
+            <p><strong>Doctor:</strong> {{ selectedEvent.doctorName }}</p>
+            <p><strong>Patient:</strong> {{ selectedEvent.patientName }}</p>
+            <p><strong>Time:</strong> {{ selectedEvent.start }} - {{ selectedEvent.end }}</p>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
   </v-container>
 </template>
 <script>
 import Navbar from "../components/Navbar.vue";
 import AppointmentService from "../services/AppointmentService";
+import PatientService from "@/services/PatientService";
 
 export default {
   name: "calendar",
@@ -86,7 +102,10 @@ export default {
       now: "2023-04-20",
       selectedDoctorId: null, // id of doctor,
       doctors: [],
+      patients: [],
       doctorObj: {},
+      dialog: false,
+      selectedEvent: {}
     };
   },
   methods: {
@@ -99,6 +118,10 @@ export default {
         this.appointments = this.$store.state.appointments;
         this.getEvents();
       });
+    },
+    showEventDetails(event) {
+      this.selectedEvent = event; // This is assuming the event contains doctorName and patientName. You might need to update this based on your actual data structure.
+      this.dialog = true;
     },
     getEvents() {
       for (let i = 0; i < this.appointments.length; i++) {
@@ -116,6 +139,8 @@ export default {
         let event = {
           docId: this.appointments[i].doctorId,
           name: "Appointment",
+          doctorName: this.getDoctorName(temp.doctorId),
+          patientName: this.getPatientName(temp.patientId),
           start: temp.appointmentDate + "T" + temp.appointmentTime,
           end: (temp.appointmentDate += "T" + endTime),
           color: "blue",
@@ -124,6 +149,21 @@ export default {
         this.events.push(event);
       }
     },
+    getDoctorName(id) {
+      let doctor = this.doctors.find(doc => doc.doctorId === id);
+      return doctor ? doctor.firstName : 'Unknown';
+    },
+
+    getPatientName(id) {
+      let patient = this.patients.find(pat => pat.patientId === id);
+      return patient ? patient.firstName : 'Unknown';
+    },
+    getPatients() {
+      PatientService.getAllPatients().then((response) => {
+        this.$store.commit("SET_PATIENTS", response.data);
+        this.patients = this.$store.state.patients;
+      });
+    }
   },
   computed: {
     // This should filter doctor apponintments by id - attached to :events for calendar
@@ -134,6 +174,7 @@ export default {
   created() {
     this.getAppointments();
     this.doctors = this.$store.state.doctors;
+    this.getPatients();
   },
 };
 </script>
