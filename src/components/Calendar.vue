@@ -115,6 +115,7 @@ export default {
     getAppointments() {
       AppointmentService.getAppointments().then((response) => {
         this.$store.commit('SET_APPOINTMENTS',response.data);
+        this.appointments = this.$store.state.appointments;
         this.getEvents();
       });
     },
