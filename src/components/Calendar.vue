@@ -114,14 +114,15 @@ export default {
     },
     getAppointments() {
       AppointmentService.getAppointments().then((response) => {
-        this.$store.commit("SET_APPOINTMENTS", response.data);
-        this.appointments = this.$store.state.appointments;
+        this.$store.commit(
+            this.$store.state.appointments;
         this.getEvents();
       });
     },
     showEventDetails(event) {
-      this.selectedEvent = event; // This is assuming the event contains doctorName and patientName. You might need to update this based on your actual data structure.
+      this.selectedEvent = event;
       this.dialog = true;
+      console.log("Clicked event details:", event);
     },
     getEvents() {
       for (let i = 0; i < this.appointments.length; i++) {
@@ -146,16 +147,19 @@ export default {
           color: "blue",
           timed: false,
         };
+        console.log("Generated event:", event);
         this.events.push(event);
       }
     },
     getDoctorName(id) {
       let doctor = this.doctors.find(doc => doc.doctorId === id);
+      console.log("Doctor fetched for ID:", id, doctor);
       return doctor ? doctor.firstName : 'Unknown';
     },
 
     getPatientName(id) {
       let patient = this.patients.find(pat => pat.patientId === id);
+      console.log("Patient fetched for ID:", id, patient);
       return patient ? patient.firstName : 'Unknown';
     },
     getPatients() {
