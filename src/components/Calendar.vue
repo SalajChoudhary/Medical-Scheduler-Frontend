@@ -100,7 +100,7 @@ export default {
       names: ["Appointment", "Holiday", "PTO"],
       appointments: [],
       now: "2023-04-20",
-      selectedDoctorId: null, // id of doctor,
+      selectedDoctorId: null,
       doctors: [],
       patients: [],
       doctorObj: {},
@@ -124,6 +124,14 @@ export default {
       this.dialog = true;
       // eslint-disable-next-line no-console
       console.log("Clicked event details:", event);
+      // eslint-disable-next-line no-console
+      console.log('Selected doctor ID:', this.selectedDoctorId);
+      // eslint-disable-next-line no-console
+      console.log('Event doctor ID:', event.docId);
+      // eslint-disable-next-line no-console
+      console.log('Doctor name:', this.getDoctorName(event.docId));
+      // eslint-disable-next-line no-console
+      console.log('Patient name:', this.getPatientName(event.patientId));
     },
     getEvents() {
       this.events = this.appointments.map(temp => {
