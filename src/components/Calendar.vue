@@ -119,9 +119,8 @@ export default {
         this.getEvents();
       });
     },
-    showEventDetails(event) {
-      // eslint-disable-next-line no-console
-      console.log("Raw event from calendar:", event);
+    showEventDetails(rawEvent) {
+      let event = rawEvent.event;
       this.selectedEvent = event;
       this.dialog = true;
       // eslint-disable-next-line no-console
