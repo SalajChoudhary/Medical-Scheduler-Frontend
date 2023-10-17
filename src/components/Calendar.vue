@@ -189,6 +189,7 @@ export default {
   async created() {
     await Promise.all([this.getAppointments(), this.getPatients()]);
     this.doctors = this.$store.state.doctors;
+    this.patients = this.$store.state.patients;
   },
 };
 </script>
