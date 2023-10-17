@@ -112,7 +112,7 @@ export default {
     chosenDoctor() {
       this.selectedDoctorId = this.doctorObj.doctorId;
     },
-    getAppointments() {
+    async getAppointments() {
       AppointmentService.getAppointments().then((response) => {
         this.$store.commit('SET_APPOINTMENTS',response.data);
         this.appointments = this.$store.state.appointments;
@@ -126,32 +126,29 @@ export default {
       console.log("Clicked event details:", event);
     },
     getEvents() {
-      for (let i = 0; i < this.appointments.length; i++) {
-        let temp = this.appointments[i];
-        let time = this.appointments[i].appointmentTime;
+      this.events = this.appointments.map(temp => {
+        let time = temp.appointmentTime;
         let endTime;
+        let hourPart = parseInt(time.slice(0, 2));
+
         if (time.slice(3, 5) === "30") {
-          endTime = time.slice(0, 2);
-          parseInt(endTime);
-          endTime++;
-          endTime = endTime.toString() + ":00:00";
+          hourPart++;
+          endTime = hourPart.toString().padStart(2, '0') + ":00:00";
         } else {
           endTime = time.slice(0, 2) + ":30:00";
         }
-        let event = {
-          docId: this.appointments[i].doctorId,
+
+        return {
+          docId: temp.doctorId,
           name: "Appointment",
           doctorName: this.getDoctorName(temp.doctorId),
           patientName: this.getPatientName(temp.patientId),
           start: temp.appointmentDate + "T" + temp.appointmentTime,
-          end: (temp.appointmentDate += "T" + endTime),
+          end: temp.appointmentDate + "T" + endTime,
           color: "blue",
           timed: false,
         };
-        // eslint-disable-next-line no-console
-        console.log("Generated event:", event);
-        this.events.push(event);
-      }
+      });
     },
     getDoctorName(id) {
       let doctor = this.doctors.find(doc => doc.doctorId === id);
@@ -166,7 +163,7 @@ export default {
       console.log("Patient fetched for ID:", id, patient);
       return patient ? patient.firstName : 'Unknown';
     },
-    getPatients() {
+    async getPatients() {
       PatientService.getAllPatients().then((response) => {
         this.$store.commit("SET_PATIENTS", response.data);
         this.patients = this.$store.state.patients;
@@ -179,10 +176,9 @@ export default {
       return this.events.filter((appt) => appt.docId === this.selectedDoctorId);
     },
   },
-  created() {
-    this.getAppointments();
+  async created() {
+    await Promise.all([this.getAppointments(), this.getPatients()]);
     this.doctors = this.$store.state.doctors;
-    this.getPatients();
   },
 };
 </script>
